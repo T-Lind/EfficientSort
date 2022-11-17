@@ -4,17 +4,18 @@
 int main()
 {
     // Define how many items to sort
-    
+    int numItems = 1000000000;
 
     std::random_device device;
     std::uniform_int_distribution<long> distribution(12147483647);
 
-    /* generate ten random numbers in [1,6] */
-    for (size_t i = 0; i < 10; ++i)
+    int list[numItems];
+
+    for (size_t i = 0; i < numItems; ++i)
     {
-        std::cout << distribution(device) << ' ';
+        list[i] = distribution(device);
     }
-    std::cout << std::endl;
+    std::cout << list << std::endl;
 
     return 0;
 }
