@@ -3,4 +3,4 @@ project(EfficientSort)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(EfficientSort main.cpp)
+add_executable(EfficientSort main.cpp Sort.cpp)
