@@ -8,7 +8,7 @@
 
 static const int nItems = 100000;
 static const int nThreads = 4;
-static int* array;
+static int* values;
 static int part;
 
 void ParallelSort::run() {
@@ -28,7 +28,7 @@ void ParallelSort::run() {
     merge(0, (nItems - 1) / 2, nItems - 1);
 
 
-    delete[] array;
+    delete[] values;
 }
 
 void ParallelSort::merge(int low, int mid, int high) {
@@ -41,11 +41,11 @@ void ParallelSort::merge(int low, int mid, int high) {
 
     // storing values in left part
     for (i = 0; i < n1; i++)
-        left[i] = array[i + low];
+        left[i] = values[i + low];
 
     // storing values in right part
     for (i = 0; i < n2; i++)
-        right[i] = array[i + mid + 1];
+        right[i] = values[i + mid + 1];
 
     int k = low;
     i = j = 0;
@@ -53,19 +53,19 @@ void ParallelSort::merge(int low, int mid, int high) {
     // merge left and right in ascending order
     while (i < n1 && j < n2) {
         if (left[i] <= right[j])
-            array[k++] = left[i++];
+            values[k++] = left[i++];
         else
-            array[k++] = right[j++];
+            values[k++] = right[j++];
     }
 
     // insert remaining values from left
     while (i < n1) {
-        array[k++] = left[i++];
+        values[k++] = left[i++];
     }
 
     // insert remaining values from right
     while (j < n2) {
-        array[k++] = right[j++];
+        values[k++] = right[j++];
     }
 }
 
@@ -101,7 +101,7 @@ void *ParallelSort::mergeSort(void *arg) {
 }
 
 void ParallelSort::assignArray(int *arr) {
-    array = arr;
+    values = arr;
 }
 
 

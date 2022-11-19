@@ -3,26 +3,20 @@
 //
 
 #include <bits/stdc++.h>
-#include <ctime>
-#include <time.h>
-#include <iostream>
-#include <pthread.h>
 #include <chrono>
-#include <cstdlib>
-#include "Sort.h"
-#include <iterator>
+#include "BasicSort.h"
 
 /**
-* Sorts the specified array into ascending
+* Sorts the specified values into ascending
 numerical order.
 *
-* @param nums the array to be sorted.
+* @param nums the values to be sorted.
 * @param low for explaining the part of
-				array working on.
+				values working on.
 * @param high for explaining the part of
-				array working on.
+				values working on.
 */
-void Sort::inside_quicksort(int *nums, int low, int high) {
+void BasicSort::inside_quicksort(int *nums, int low, int high) {
     // Base Condition
     if (low >= high)
         return;
@@ -48,19 +42,19 @@ void Sort::inside_quicksort(int *nums, int low, int high) {
             end--;
         }
     }
-    Sort::inside_quicksort(nums, low, end);
-    Sort::inside_quicksort(nums, start, high);
+    BasicSort::inside_quicksort(nums, low, end);
+    BasicSort::inside_quicksort(nums, start, high);
 }
 
-void Sort::sort(int *arr, int nItems) {
+void BasicSort::sort(int *arr, int nItems) {
     std::sort(arr, arr + nItems);
 }
 
-void Sort::quicksort(int *arr, int nItems) {
-    Sort::inside_quicksort(arr, 0, nItems - 1);
+void BasicSort::quicksort(int *arr, int nItems) {
+    BasicSort::inside_quicksort(arr, 0, nItems - 1);
 }
 
-long Sort::time(int* values, int nItems, void (*func)(int *, int nItems)) {
+long BasicSort::time(int* values, int nItems, void (*func)(int *, int nItems)) {
     using namespace std::chrono;
     auto start = high_resolution_clock::now();
     func(values, nItems);
@@ -69,7 +63,7 @@ long Sort::time(int* values, int nItems, void (*func)(int *, int nItems)) {
     return (long) duration.count();
 }
 
-long Sort::time(void (*func)()) {
+long BasicSort::time(void (*func)()) {
     using namespace std::chrono;
     auto start = high_resolution_clock::now();
     func();
