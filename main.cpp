@@ -2,7 +2,7 @@
 // ascending order using optimized
 // approach using quick sort
 #include <bits/stdc++.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include "Sort.h"
 #include <iterator>
 
@@ -10,18 +10,25 @@ using namespace std;
 
 
 int main() {
-    int nItems = 1000000;
+    int nItems = 10000000;
 
-    int values[nItems];
+    int* values = new int[nItems];
+    int* valuesCpy = new int[nItems];
     for (int i = 0; i < nItems; i++) {
-        values[i] = rand() % INT32_MAX;
+        int val = rand() % INT32_MAX;
+        values[i] = val;
+        valuesCpy[i] = val;
     }
 
-    int valuesCpy[nItems];
-    memcpy(valuesCpy, values, nItems * sizeof(int));
+    cout << "Quicksort: " << Sort::time(values, nItems, Sort::quicksort) << endl;
+    cout << "STD Sort: " << Sort::time(valuesCpy, nItems, Sort::sort) << endl;
+    cout << "Parallel Sort: " << Sort::time(valuesCpy, nItems, Sort::parallelsort) << endl;
 
-    cout << Sort::time(values, Sort::quicksort) << endl;
-    cout << Sort::time(values, Sort::sort) << endl;
+
+
+    delete[] values;
+    delete[] valuesCpy;
     return 0;
 
 }
+
