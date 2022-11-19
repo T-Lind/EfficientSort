@@ -109,7 +109,8 @@ int main() {
         values2Cpy[i] = val;
     }
 
-
+    cout << "Sorting:" << endl;
+    cout << "---------" << endl;
     cout << "Quicksort: " << BasicSort::time(values, N_ITEMS, BasicSort::quicksort) << endl;
     cout << "STD BasicSort: " << BasicSort::time(valuesCpy, N_ITEMS, BasicSort::sort) << endl;
     cout << "Parallel Mergesort: " << runSort()  << endl;
