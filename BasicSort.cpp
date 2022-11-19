@@ -6,23 +6,11 @@
 #include <chrono>
 #include "BasicSort.h"
 
-/**
-* Sorts the specified values into ascending
-numerical order.
-*
-* @param nums the values to be sorted.
-* @param low for explaining the part of
-				values working on.
-* @param high for explaining the part of
-				values working on.
-*/
+
 void BasicSort::inside_quicksort(int *nums, int low, int high) {
-    // Base Condition
     if (low >= high)
         return;
 
-    // These are just for swapping
-    // the elements.
     int start = low, end = high;
     int mid = start + ((end - start) / 2);
     int pivot = nums[mid];
@@ -33,8 +21,6 @@ void BasicSort::inside_quicksort(int *nums, int low, int high) {
         while (nums[end] > pivot)
             end--;
         if (start <= end) {
-            // Swapping the start and end
-            // elements.
             int x = nums[start];
             nums[start] = nums[end];
             nums[end] = x;

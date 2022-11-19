@@ -1,4 +1,4 @@
-// C++ program to sort an values in
+// C++ program to sort values in
 // ascending order using optimized
 // approach using quick sort
 #include <cstdlib>
