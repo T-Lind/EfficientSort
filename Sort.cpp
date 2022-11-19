@@ -2,11 +2,10 @@
 // Created by zenith on 11/18/2022.
 //
 
-#include <cstdint>
-#include <cstdlib>
+#include <bits/stdc++.h>
+#include <ctime>
+#include <chrono>
 #include "Sort.h"
-
-
 
 
 /**
@@ -19,7 +18,7 @@ numerical order.
 * @param high for explaining the part of
 				array working on.
 */
-void Sort::quicksort(int *nums, int low, int high) {
+void Sort::inside_quicksort(int *nums, int low, int high) {
     // Base Condition
     if (low >= high)
         return;
@@ -35,8 +34,7 @@ void Sort::quicksort(int *nums, int low, int high) {
             start++;
         while (nums[end] > pivot)
             end--;
-        if (start <= end)
-        {
+        if (start <= end) {
             // Swapping the start and end
             // elements.
             int x = nums[start];
@@ -46,7 +44,26 @@ void Sort::quicksort(int *nums, int low, int high) {
             end--;
         }
     }
-    Sort::quicksort(nums, low, end);
-    Sort::quicksort(nums, start, high);
+    Sort::inside_quicksort(nums, low, end);
+    Sort::inside_quicksort(nums, start, high);
+}
+
+void Sort::sort(int *arr) {
+    int n = sizeof(*arr) / sizeof(arr[0]);
+    std::sort(arr, arr + n);
+}
+
+void Sort::quicksort(int *arr) {
+    int n = sizeof(*arr) / sizeof(arr[0]);
+    Sort::inside_quicksort(arr, 0, n - 1);
+}
+
+long Sort::time(int *vals, void (*func)(int nums[])) {
+    using namespace std::chrono;
+    auto start = high_resolution_clock::now();
+    func(vals);
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(end - start);
+    return (long) duration.count();
 }
 

@@ -4,27 +4,24 @@
 #include <bits/stdc++.h>
 #include <stdlib.h>
 #include "Sort.h"
-#include <climits>
-#include <algorithm>
 #include <iterator>
 
 using namespace std;
 
 
-int main()
-{
-    int nItems = 10;
+int main() {
+    int nItems = 1000000;
 
     int values[nItems];
-    for(int i=0;i<nItems;i++){
+    for (int i = 0; i < nItems; i++) {
         values[i] = rand() % INT32_MAX;
     }
 
-    int dest[nItems];
+    int valuesCpy[nItems];
+    memcpy(valuesCpy, values, nItems * sizeof(int));
 
-
-    Sort::quicksort(values, 0, nItems - 1);
-
+    cout << Sort::time(values, Sort::quicksort) << endl;
+    cout << Sort::time(values, Sort::sort) << endl;
     return 0;
-}
 
+}
