@@ -24,7 +24,6 @@ void merge(int low, int mid, int high) {
 
     for (i = 0; i < n1; i++)
         left[i] = values[i + low];
-
     for (i = 0; i < n2; i++)
         right[i] = values[i + mid + 1];
 
@@ -40,8 +39,6 @@ void merge(int low, int mid, int high) {
 
     while (i < n1)
         values[k++] = left[i++];
-
-
     while (j < n2)
         values[k++] = right[j++];
 
@@ -52,7 +49,6 @@ void merge_sort(int low, int high) {
     if (low < high) {
 
         merge_sort(low, mid);
-
         merge_sort(mid + 1, high);
 
         merge(low, mid, high);
@@ -75,6 +71,10 @@ void* mergeSort(void* arg) {
     return nullptr;
 }
 
+/**
+ * Use four parallel threads to compute a mergesort!
+ * @return the time it takes to execute the mergesort. The sorted array is declared globally and can be accessed anywhere.
+ */
 int runSort() {
     using namespace std::chrono;
     pthread_t threads[N_THREADS];
@@ -111,10 +111,12 @@ int main() {
 
     cout << "Sorting:" << endl;
     cout << "---------" << endl;
-    cout << "Quicksort: " << BasicSort::time(values, N_ITEMS, BasicSort::quicksort) << endl;
-    cout << "STD Mergesort: " << BasicSort::time(valuesCpy, N_ITEMS, BasicSort::sort) << endl;
-    cout << "Parallel Mergesort: " << runSort()  << endl;
+    cout << "Quicksort: " << BasicSort::time(values, N_ITEMS, BasicSort::quicksort) << endl;    // Typically faster than STD mergesort
+    cout << "STD Mergesort: " << BasicSort::time(valuesCpy, N_ITEMS, BasicSort::sort) << endl;  // Typically the slowest
+    cout << "Parallel Mergesort: " << runSort()  << endl;                                       // Typically the fastest, or on par with quicksort
 
+
+    // Remove the arrays, which were generated above actually
     delete[] values;
     delete[] valuesCpy;
     delete[] values2Cpy;
